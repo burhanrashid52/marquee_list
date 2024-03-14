@@ -24,42 +24,50 @@ class _MarqueeListState extends State<MarqueeList> {
   late final _scrollController = ScrollController();
   late Timer _timer;
   double _scrollPosition = 0.0;
-  double _itemWidth = 0.0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _itemWidth = scrollDirection == Axis.horizontal
-          ? context.size!.width
-          : context.size!.height;
+      final size = itemSize;
       _timer = Timer.periodic(widget.scrollDuration, (_) {
-        if (_scrollPosition < _itemWidth * widget.children.length) {
-          if (_scrollPosition < _scrollController.position.maxScrollExtent) {
-            _scrollPosition += 100;
-            _scrollController.animateTo(
-              _scrollPosition,
-              duration: widget.scrollDuration,
-              curve: Curves.linear,
-            );
+        if (isScrollAvailable(size)) {
+          if (isScrollLeft) {
+            _moveForward();
           } else {
-            _scrollPosition = 0.0;
-            _scrollController.animateTo(
-              _scrollPosition,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.linear,
-            );
+            _resetToStart();
           }
         }
       });
     });
   }
 
-  @override
-  void dispose() {
-    _timer.cancel();
-    _scrollController.dispose();
-    super.dispose();
+  bool isScrollAvailable(double size) =>
+      _scrollPosition < size * widget.children.length;
+
+  bool get isScrollLeft =>
+      _scrollPosition < _scrollController.position.maxScrollExtent;
+
+  double get itemSize => scrollDirection == Axis.horizontal
+      ? context.size!.width
+      : context.size!.height;
+
+  void _moveForward() {
+    _scrollPosition += 100;
+    _scrollController.animateTo(
+      _scrollPosition,
+      duration: widget.scrollDuration,
+      curve: Curves.linear,
+    );
+  }
+
+  void _resetToStart() {
+    _scrollPosition = 0.0;
+    _scrollController.animateTo(
+      _scrollPosition,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.linear,
+    );
   }
 
   Axis get scrollDirection => widget.scrollDirection;
@@ -75,5 +83,12 @@ class _MarqueeListState extends State<MarqueeList> {
         Axis.vertical => Column(children: widget.children),
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _scrollController.dispose();
+    super.dispose();
   }
 }
