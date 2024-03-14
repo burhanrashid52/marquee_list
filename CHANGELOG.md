@@ -1,3 +1,5 @@
 ## 0.0.1
+* Setup the publishing.
 
-* TODO: Describe initial release.
+## 0.0.2
+* Support horizontal marquee list
