@@ -9,10 +9,12 @@ class MarqueeList extends StatefulWidget {
     super.key,
     required this.children,
     this.scrollDuration = const Duration(seconds: 1),
+    this.scrollDirection = Axis.horizontal,
   });
 
   final List<Widget> children;
   final Duration scrollDuration;
+  final Axis scrollDirection;
 
   @override
   _MarqueeListState createState() => _MarqueeListState();
@@ -28,7 +30,9 @@ class _MarqueeListState extends State<MarqueeList> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _itemWidth = context.size!.width;
+      _itemWidth = scrollDirection == Axis.horizontal
+          ? context.size!.width
+          : context.size!.height;
       _timer = Timer.periodic(widget.scrollDuration, (_) {
         if (_scrollPosition < _itemWidth * widget.children.length) {
           if (_scrollPosition < _scrollController.position.maxScrollExtent) {
@@ -58,15 +62,18 @@ class _MarqueeListState extends State<MarqueeList> {
     super.dispose();
   }
 
+  Axis get scrollDirection => widget.scrollDirection;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.horizontal,
+      scrollDirection: scrollDirection,
       controller: _scrollController,
-      child: Row(
-        children: widget.children,
-      ),
+      child: switch (scrollDirection) {
+        Axis.horizontal => Row(children: widget.children),
+        Axis.vertical => Column(children: widget.children),
+      },
     );
   }
 }
