@@ -7,3 +7,6 @@
 ## 0.0.3
 * Internal refactoring
 * ReadMe update
+
+## 0.0.4
+* Dart documentation
