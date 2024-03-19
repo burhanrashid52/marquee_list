@@ -1,6 +1,9 @@
 A Flutter Marquee list widget to display a list of items in
 a [marquee style](https://en.wikipedia.org/wiki/Marquee_element).
 
+![marquee_list_showcase](https://github.com/burhanrashid52/marquee_list/assets/14251963/9da1ed13-86a5-4761-b97d-23a4b693b8b3)
+
+
 ## Features
 
 Use this widget in your Flutter app to:
