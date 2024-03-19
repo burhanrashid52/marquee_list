@@ -1,8 +1,14 @@
 name: marquee_list
-description: "A marquee list widget"
+description: "A Marquee list widget to display a list of items in a marquee style"
 version: 0.0.3
 homepage: https://github.com/burhanrashid52/marquee_list
 repository: https://github.com/burhanrashid52/marquee_list
+
+topics:
+  - marquee
+  - widgets
+  - scroll
+  - list
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
