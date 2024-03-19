@@ -12,15 +12,63 @@ Use this widget in your Flutter app to:
 - Customize the scrolling speed using `scrollDuration`.
 
 ## Usage
+### Scroll horizontally
+```dart
+import 'package:marquee_list/marquee_list.dart';
 
-- Scroll horizontally
-- Scroll vertically
-- Customize the scrolling speed
+//....
+   child: MarqueeList(
+     scrollDirection: Axis.horizontal, // By default, it's horizontal
+     children: [
+       Text("Text 1"),
+       Text("Text 2"),
+       Text("Text 3"),
+       Text("Text 4"),
+     ],
+   ),
+//....
+```
+### Scroll vertically
+```dart
+import 'package:marquee_list/marquee_list.dart';
+
+//....
+   child: MarqueeList(
+     scrollDirection: Axis.vertical, // Change direction to vertical
+     children: [
+       Text("Text 1"),
+       Text("Text 2"),
+       Text("Text 3"),
+       Text("Text 4"),
+     ],
+   ),
+//....
+```
+### Customize the scrolling speed
+```dart
+import 'package:marquee_list/marquee_list.dart';
+
+//....
+   child: MarqueeList(
+     scrollDuration: const Duration(seconds: 3), // Default is 1 second
+     children: [
+       Text("Text 1"),
+       Text("Text 2"),
+       Text("Text 3"),
+       Text("Text 4"),
+     ],
+   ),
+//....
+```
 
 ## Contributing to this package
+Contributions are welcome! Here is a curated list of how you can help:
 
-If you would like to contribute to the package, check out
-our [contribution guide](https://github.com/burhanrashid52/marquee_list/blob/main/CONTRIBUTION.md).
+- Report bugs and scenarios that are difficult to implement 
+- Report parts of the documentation that are unclear 
+- Fix typos/grammar mistakes 
+- Update the documentation or add examples 
+- Implement new features by making a pull-request
 
 ## MIT License
 
