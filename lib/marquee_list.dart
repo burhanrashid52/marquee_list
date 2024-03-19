@@ -4,7 +4,35 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+/// A Flutter widget that scrolls its children infinitely in a marquee fashion.
+///
+/// The [MarqueeList] widget takes a list of children and scrolls them infinitely
+/// in the specified [scrollDirection]. It can be used to create a marquee effect
+/// for displaying scrolling content horizontally or vertically.
+///
+/// The speed of the scroll animation is controlled by the [scrollDuration] parameter.
+/// The children will scroll continuously until the widget is disposed or the
+/// animation is stopped manually.
+///
+/// Example usage:
+///
+/// ```dart
+/// MarqueeList(
+///   scrollDirection: Axis.horizontal,
+///   scrollDuration: Duration(seconds: 2),
+///   children: [
+///     Text('This is a scrolling text 1'),
+///     Text('This is a scrolling text 2'),
+///     Text('This is a scrolling text 3'),
+///   ],
+/// )
+/// ```
 class MarqueeList extends StatefulWidget {
+  /// Creates a marquee list widget.
+  ///
+  /// The [children] parameter must not be null.
+  /// The [scrollDuration] defaults to 1 second.
+  /// The [scrollDirection] defaults to [Axis.horizontal].
   const MarqueeList({
     super.key,
     required this.children,
@@ -12,8 +40,13 @@ class MarqueeList extends StatefulWidget {
     this.scrollDirection = Axis.horizontal,
   });
 
+  /// The list of widgets to be scrolled infinitely.
   final List<Widget> children;
+
+  /// The duration of each scroll animation.
   final Duration scrollDuration;
+
+  /// The direction in which the children will be scrolled.
   final Axis scrollDirection;
 
   @override
