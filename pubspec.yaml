@@ -1,7 +1,7 @@
 name: marquee_list
-description: "A marquee widget."
-version: 0.0.2
-homepage: https://burhanrashid52.com
+description: "A marquee list widget"
+version: 0.0.3
+homepage: https://github.com/burhanrashid52/marquee_list
 repository: https://github.com/burhanrashid52/marquee_list
 
 environment:

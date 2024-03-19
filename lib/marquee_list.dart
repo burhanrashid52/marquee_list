@@ -29,10 +29,10 @@ class _MarqueeListState extends State<MarqueeList> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final size = itemSize;
+      final size = _itemSize;
       _timer = Timer.periodic(widget.scrollDuration, (_) {
-        if (isScrollAvailable(size)) {
-          if (isScrollLeft) {
+        if (_isScrollAvailable(size)) {
+          if (_isScrollRemain) {
             _moveForward();
           } else {
             _resetToStart();
@@ -42,13 +42,13 @@ class _MarqueeListState extends State<MarqueeList> {
     });
   }
 
-  bool isScrollAvailable(double size) =>
+  bool _isScrollAvailable(double size) =>
       _scrollPosition < size * widget.children.length;
 
-  bool get isScrollLeft =>
+  bool get _isScrollRemain =>
       _scrollPosition < _scrollController.position.maxScrollExtent;
 
-  double get itemSize => scrollDirection == Axis.horizontal
+  double get _itemSize => _scrollDirection == Axis.horizontal
       ? context.size!.width
       : context.size!.height;
 
@@ -70,15 +70,15 @@ class _MarqueeListState extends State<MarqueeList> {
     );
   }
 
-  Axis get scrollDirection => widget.scrollDirection;
+  Axis get _scrollDirection => widget.scrollDirection;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const NeverScrollableScrollPhysics(),
-      scrollDirection: scrollDirection,
+      scrollDirection: _scrollDirection,
       controller: _scrollController,
-      child: switch (scrollDirection) {
+      child: switch (_scrollDirection) {
         Axis.horizontal => Row(children: widget.children),
         Axis.vertical => Column(children: widget.children),
       },

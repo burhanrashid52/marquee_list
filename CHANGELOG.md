@@ -3,3 +3,7 @@
 
 ## 0.0.2
 * Support horizontal marquee list
+
+## 0.0.3
+* Internal refactoring
+* ReadMe update
