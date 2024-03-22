@@ -33,11 +33,15 @@ class MarqueeList extends StatefulWidget {
   /// The [children] parameter must not be null.
   /// The [scrollDuration] defaults to 1 second.
   /// The [scrollDirection] defaults to [Axis.horizontal].
+  /// The [mainAxisAlignment] defaults to [MainAxisAlignment.center].
+  /// The [crossAxisAlignment] defaults to [CrossAxisAlignment.center].
   const MarqueeList({
     super.key,
     required this.children,
     this.scrollDuration = const Duration(seconds: 1),
     this.scrollDirection = Axis.horizontal,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   });
 
   /// The list of widgets to be scrolled infinitely.
@@ -49,8 +53,14 @@ class MarqueeList extends StatefulWidget {
   /// The direction in which the children will be scrolled.
   final Axis scrollDirection;
 
+  /// MainAxisAlignment for the text inside the list.
+  final MainAxisAlignment mainAxisAlignment;
+
+  /// CrossAxisAlignment for the text inside the list.
+  final CrossAxisAlignment crossAxisAlignment;
+
   @override
-  _MarqueeListState createState() => _MarqueeListState();
+  State<MarqueeList> createState() => _MarqueeListState();
 }
 
 class _MarqueeListState extends State<MarqueeList> {
@@ -112,8 +122,16 @@ class _MarqueeListState extends State<MarqueeList> {
       scrollDirection: _scrollDirection,
       controller: _scrollController,
       child: switch (_scrollDirection) {
-        Axis.horizontal => Row(children: widget.children),
-        Axis.vertical => Column(children: widget.children),
+        Axis.horizontal => Row(
+            mainAxisAlignment: widget.mainAxisAlignment,
+            crossAxisAlignment: widget.crossAxisAlignment,
+            children: widget.children,
+          ),
+        Axis.vertical => Column(
+            mainAxisAlignment: widget.mainAxisAlignment,
+            crossAxisAlignment: widget.crossAxisAlignment,
+            children: widget.children,
+          ),
       },
     );
   }
