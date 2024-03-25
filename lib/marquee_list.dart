@@ -38,10 +38,14 @@ class MarqueeList extends StatefulWidget {
     required this.children,
     this.scrollDuration = const Duration(seconds: 1),
     this.scrollDirection = Axis.horizontal,
+    this.onScrollEnd,
   });
 
   /// The list of widgets to be scrolled infinitely.
   final List<Widget> children;
+
+  /// callback when the scroll animation ends
+  final VoidCallback? onScrollEnd;
 
   /// The duration of each scroll animation.
   final Duration scrollDuration;
@@ -68,6 +72,7 @@ class _MarqueeListState extends State<MarqueeList> {
           if (_isScrollRemain) {
             _moveForward();
           } else {
+            widget.onScrollEnd?.call();
             _resetToStart();
           }
         }

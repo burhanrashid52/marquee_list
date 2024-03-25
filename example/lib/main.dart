@@ -43,6 +43,7 @@ class MarqueeListPage extends StatelessWidget {
           SizedBox(
             height: 50,
             child: MarqueeList(
+              onScrollEnd: () {},
               children: [
                 for (int i = 0; i < breakingNews.length; i++)
                   Text(
