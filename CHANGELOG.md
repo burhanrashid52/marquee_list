@@ -10,3 +10,6 @@
 
 ## 0.0.4
 * Dart documentation
+
+## 1.0.0
+* Stable version
