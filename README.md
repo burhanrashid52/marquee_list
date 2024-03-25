@@ -60,6 +60,25 @@ import 'package:marquee_list/marquee_list.dart';
    ),
 //....
 ```
+### Receive call back when scroll ends using `onScrollEnd` callback
+```dart
+import 'package:marquee_list/marquee_list.dart';
+
+//....
+   child: MarqueeList(
+     scrollDirection: Axis.horizontal,
+     onScrollEnd: () {
+       // Do something when the scroll ends
+     },
+     children: [
+       Text("Text 1"),
+       Text("Text 2"),
+       Text("Text 3"),
+       Text("Text 4"),
+     ],
+   ),
+//....
+```
 
 ## Contributing to this package
 Contributions are welcome! Here is a curated list of how you can help:
