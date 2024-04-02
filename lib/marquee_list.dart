@@ -33,12 +33,14 @@ class MarqueeList extends StatefulWidget {
   /// The [children] parameter must not be null.
   /// The [scrollDuration] defaults to 1 second.
   /// The [scrollDirection] defaults to [Axis.horizontal].
+  /// The [reverse] defaults to false.
   const MarqueeList({
     super.key,
     required this.children,
     this.scrollDuration = const Duration(seconds: 1),
     this.scrollDirection = Axis.horizontal,
     this.onScrollEnd,
+    this.reverse = false,
   });
 
   /// The list of widgets to be scrolled infinitely.
@@ -52,6 +54,9 @@ class MarqueeList extends StatefulWidget {
 
   /// The direction in which the children will be scrolled.
   final Axis scrollDirection;
+
+  /// Weather we want to reverse the scroll direction.
+  final bool reverse;
 
   @override
   _MarqueeListState createState() => _MarqueeListState();
@@ -113,6 +118,7 @@ class _MarqueeListState extends State<MarqueeList> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      reverse: widget.reverse,
       physics: const NeverScrollableScrollPhysics(),
       scrollDirection: _scrollDirection,
       controller: _scrollController,
